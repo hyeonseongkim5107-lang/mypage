@@ -1,16 +1,3 @@
-import { auth } from "./auth";
+export function middleware() {}
 
-export default auth((req) => {
-  const isLoggedIn = !!req.auth;
-  const isAdminPath = req.nextUrl.pathname.startsWith("/admin");
-
-  if (isAdminPath && !isLoggedIn) {
-    const loginUrl = new URL("/login", req.nextUrl.origin);
-    loginUrl.searchParams.set("callbackUrl", req.nextUrl.pathname);
-    return Response.redirect(loginUrl);
-  }
-});
-
-export const config = {
-  matcher: ["/admin/:path*"],
-};
+export const config = { matcher: [] };
